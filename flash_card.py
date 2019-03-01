@@ -14,8 +14,18 @@ def read_questions():
         for line in f:
             a = line.split()
             que = a[0]
-            ans = a[1] 
-            print("question {} answer {}".format(que,ans))
+            ans = a[1]
+            qstnarea.config(text=que)
+            #print("question {} answer {}".format(que,ans))
+
+def read_answer():
+    with open("test_card.txt") as f:
+        for line in f:
+            a = line.split()
+            que = a[0]
+            ans = a[1]
+            qstnarea.config(text=ans)
+            #print("question {} answer {}".format(que,ans))
 
 def close_window ():
     window.destroy()
@@ -38,6 +48,10 @@ window.title("Flash_card game")
 #question area
 qstnarea =Tk.Label(window,text="",height=8,width =30, bg="white")
 qstnarea.place(x=50, y= 100)
+nextqstn=Tk.Button(window, text= "Next Question",command=read_questions, height =3, width =10)
+nextqstn.place(x=60, y=300)
+seeanswr=Tk.Button(window, text= "See Answer",command=read_answer, height =3, width =10)
+seeanswr.place(x=200, y=300)
 
 
 label1=Tk.Label(window, text=" welcome to FlashCards", font =("Ariel" ,30))
