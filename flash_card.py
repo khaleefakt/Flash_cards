@@ -7,7 +7,7 @@ correct_counter = 0
 wrong_counter =0
 #functions
 def pop_up():
-    msg = messagebox.showinfo( "Hello Python", "Hello World")
+    msg = messagebox.showinfo( "Confirmation", "Are You Sure..?")
 
 def read_questions():
     with open("test_card.txt") as f:
@@ -54,7 +54,7 @@ correct=Tk.Label(window, text="corrected", height =3, width = 10,bg="red")
 correct.place(x=350, y =120)
 lab2 = Tk.Label(window, height=2, width = 10,bg="white")
 lab2.place(x=350, y= 170)
-btn1 =Tk.Button(window, text= "I Was Right",command=correct_guess)
+btn1 =Tk.Button(window, text= "I Was Right",command=lambda:[correct_guess(),pop_up()])
 btn1.place(x=50, y=250)
 
 #wrong
@@ -62,7 +62,7 @@ wrong=Tk.Label(window, text="wrong", height =3, width = 10 )
 wrong.place(x=350, y =200)
 lab3 = Tk.Label(window, height=2, width = 10,bg="white")
 lab3.place(x=350, y= 250)
-btn2 =Tk.Button(window, text= "I Was Wrong",command= wrong_guess)
+btn2 =Tk.Button(window, text= "I Was Wrong",command=lambda:[ wrong_guess(),pop_up()])
 btn2.place(x=170, y=250)
 
 #exit Button
