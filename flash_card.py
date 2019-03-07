@@ -10,8 +10,10 @@ correct_counter = 0
 wrong_counter =0
 cards =[]
 remaining =60
-current_card = 0
-#functions
+
+global f
+f= open("capitals.txt")
+#functions load_card,next_card,Score
 def remTime():
     global remainig
     if remaining <= 0:
@@ -29,28 +31,22 @@ def myOpen():
     myOpen = filedialog.askopenfile("/Cards")
     mlabel4 = Label(myApp,text=myOpen).pack()
 
-def next_card():
-    with open("test_card.txt") as f:
-        for i in f: #1
-            q,a=i.split('-') #2
-            cards.append([q,a]) #3
-            qstnarea.config(text =q)
-    
-    
-            
-#def next_card():
- #   cards[q]=q
-   # card[q] +=1
-  #  qstnarea.config(text=q)
-    
-def read_answer():
-    with open("test_card.txt") as f:
-        for i in f:
-            q,a=i.split('-')
-            cards.append([q,a])
-            qstnarea.config(text=a)
 def close_window ():
     window.destroy()
+
+def read_question():
+    cards=[]
+    i = f.readline()
+    global a
+    q,a = i.split('-')
+    qstnarea.config(text = q)
+    cards.append([q,a])
+    #current_line = current_line + 1
+    
+def read_answer():
+    ans = a
+    qstnarea.config(text = ans)
+    
 
 def correct_guess():
     global correct_counter
@@ -67,7 +63,16 @@ def about():
     window2 = tkinter.Tk()
     window2.geometry("500x400")
     window2.title("New Window")
-    label4 = Tk.Label(window2, text="This is the new window")
+    label4 = Tk.Label(window2, text="""
+A flashcard or flash card is a card bearing information, 
+as words or numbers, on either or both sides, used in
+ classroom drills or in private study. One writes a question
+ on a side and an answer overleaf. Flashcards can bear vocabulary,
+ historical dates, formulae or any subject matter that can be
+ learned via a question-and-answer format. Flashcards are widely
+ used as a learning drill to aid memorization. They are often
+ associated with spaced repetition, i.e. reviewed at expanding
+ time intervals. """)
     label4.place(x=20, y=20)
     window2.mainloop()
     
@@ -84,7 +89,7 @@ windowFrame.grid(row=5, column=4)
 #question area
 qstnarea =Tk.Label(window,text="",height=8,width =30, bg="white")
 qstnarea.place(x=50, y= 100)
-nextqstn=Tk.Button(window, text= "Next Question",command=next_card, height =3, width =10)
+nextqstn=Tk.Button(window, text= "Next Question",command=read_question, height =3, width =10)
 nextqstn.place(x=50, y=300)
 seeanswr=Tk.Button(window, text= "See Answer",command=read_answer, height =3, width =10)
 seeanswr.place(x=190, y=300)
@@ -133,7 +138,7 @@ filemenu1 =Tk.Menu(menubar, tearoff=0)
 #Add the sub headings to the file menu
 filemenu.add_command(label="Level", command=myOpen)
 menubar.add_cascade(label="File",menu=filemenu)
-filemenu1.add_command(label="About us", command =about)
+filemenu1.add_command(label="About Game", command =about)
 menubar.add_cascade(label="About",menu=filemenu1)
 
 #add menubar to the window
