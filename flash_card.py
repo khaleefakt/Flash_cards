@@ -14,12 +14,10 @@ remaining =60
 
 
 #functions load_card,next_card,Score
-def pop_up():
-    msg = messagebox.showinfo( "Confirmation", "Are You Sure..?")
 
 def myOpen():
     myOpen = filedialog.askopenfile("/Cards")
-    mlabel4 = Label(myApp,text=myOpen).pack()
+    mlabel4 =Tk.Label(myApp,text=myOpen).pack()
 
 def close_window ():
     window.destroy()
@@ -37,8 +35,7 @@ def read_question():
     #current_line = current_line + 1
     
 def read_answer():
-    ans = a
-    qstnarea.config(text = ans)
+    qstnarea.config(text = a)
     
 def correct_guess():
     global correct_counter
@@ -53,14 +50,27 @@ def wrong_guess():
 def rem_time():
     for i in range(60,0,-1):
         timeshow.config(text = i)
-        time.sleep(1)
-    
+
+
+def progress_show():
+    window3 = tkinter.Tk()
+    window3.geometry("500x400")
+    window3.title("Progress")
+    Pcorrect1=Tk.Label(window3,text="correct_counter")
+    Pcorrect1.pack()
+    Pcorrect=Tk.Label(window3,text=correct_counter)
+    Pcorrect.pack()
+    Pwrong1=Tk.Label(window3, text= "wrong_counter")
+    Pwrong1.pack()
+    Pwrong=Tk.Label(window3, text= wrong_counter)
+    Pwrong.pack()
+    window3.mainloop()
 
 #new window
 def about():
     window2 = tkinter.Tk()
     window2.geometry("500x400")
-    window2.title("New Window")
+    window2.title("About Game")
     label4 = Tk.Label(window2, text="""
 A flashcard or flash card is a card bearing information, 
 as words or numbers, on either or both sides, used in
@@ -73,7 +83,6 @@ as words or numbers, on either or both sides, used in
  time intervals. """)
     label4.place(x=20, y=20)
     window2.mainloop()
-    
 
 #make the GUI
 window = tkinter.Tk()
@@ -115,7 +124,7 @@ correct=Tk.Label(window, text="correct\n Guess", height =2, width = 10) #bg="red
 correct.place(x=350, y =140)
 lab2 = Tk.Label(window, height=1, width = 10,bg="white")
 lab2.place(x=350, y= 180)
-btn1 =Tk.Button(window, text= "I Was Right",command=lambda:[correct_guess(),pop_up()], width=10)
+btn1 =Tk.Button(window, text= "I Was Right",command=correct_guess, width=10)
 btn1.place(x=50, y=250)
 
 #wrong
@@ -123,7 +132,7 @@ wrong=Tk.Label(window, text="wrong\n Guess", height =2, width = 10 )
 wrong.place(x=350, y =210)
 lab3 = Tk.Label(window, height=1, width = 10,bg="white")
 lab3.place(x=350, y= 250)
-btn2 =Tk.Button(window, text= "I Was Wrong",command=lambda:[wrong_guess(),pop_up()], width =10)
+btn2 =Tk.Button(window, text= "I Was Wrong",command=wrong_guess, width =10)
 btn2.place(x=190, y=250)
 
 #exit Button
@@ -131,8 +140,8 @@ btn3= Tk.Button(window, text="Quit", command=close_window, height=3, width=10)
 btn3.place(x=350, y =300)
 
 #New_window
-#btn4=Tk.Button(window, text= "New window",command=command)
-#btn4.place(x=190, y=280)
+btn4=Tk.Button(window, text= "Show Your Progress",command=progress_show,width = 28)
+btn4.place(x=50, y=370)
 
 
 #create the menubar
