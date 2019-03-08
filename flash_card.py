@@ -52,19 +52,6 @@ def rem_time():
         timeshow.config(text = i)
 
 
-def progress_show():
-    window3 = tkinter.Tk()
-    window3.geometry("500x400")
-    window3.title("Progress")
-    Pcorrect1=Tk.Label(window3,text="correct_counter")
-    Pcorrect1.pack()
-    Pcorrect=Tk.Label(window3,text=correct_counter)
-    Pcorrect.pack()
-    Pwrong1=Tk.Label(window3, text= "wrong_counter")
-    Pwrong1.pack()
-    Pwrong=Tk.Label(window3, text= wrong_counter)
-    Pwrong.pack()
-    window3.mainloop()
 
 #new window
 def about():
@@ -139,9 +126,6 @@ btn2.place(x=190, y=250)
 btn3= Tk.Button(window, text="Quit", command=close_window, height=3, width=10)
 btn3.place(x=350, y =300)
 
-#New_window
-btn4=Tk.Button(window, text= "Show Your Progress",command=progress_show,width = 28)
-btn4.place(x=50, y=370)
 
 
 #create the menubar
