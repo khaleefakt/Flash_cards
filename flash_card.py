@@ -4,6 +4,7 @@ import tkinter as Tk
 from tkinter import messagebox
 from tkinter import Frame
 from tkinter import filedialog
+import time
 
 #variables
 correct_counter = 0
@@ -13,16 +14,6 @@ remaining =60
 
 
 #functions load_card,next_card,Score
-def remTime():
-    global remainig
-    if remaining <= 0:
-        lab1.config(text="Times Up.")
-    else:
-        for i in remaining:
-            lab1.config(text=remaining)
-            remaining = remaining - 1
-
-
 def pop_up():
     msg = messagebox.showinfo( "Confirmation", "Are You Sure..?")
 
@@ -32,13 +23,10 @@ def myOpen():
 
 def close_window ():
     window.destroy()
-
-
     
 global f
 f = open("capitals.txt")
-def call_back():
-    loadcard.config(state = DISABLED)
+
 def read_question():
     cards=[]
     i = f.readline()
@@ -52,7 +40,6 @@ def read_answer():
     ans = a
     qstnarea.config(text = ans)
     
-
 def correct_guess():
     global correct_counter
     correct_counter += 1
@@ -63,6 +50,11 @@ def wrong_guess():
     wrong_counter += 1
     lab3.config(text= wrong_counter)
 
+def rem_time():
+    for i in range(60,0,-1):
+        timeshow.config(text = i)
+        time.sleep(1)
+    
 
 #new window
 def about():
@@ -93,8 +85,6 @@ windowFrame = Frame(window)
 windowFrame.grid(row=5, column=4)
 
 
-chk = Tk.Checkbutton(window, text="pic")
-
 #question area
 qstnarea =Tk.Label(window,text=
 """Press Load Card button for
@@ -103,7 +93,7 @@ qstnarea =Tk.Label(window,text=
  Answer for see the answer""",
                    height=8,width =30, bg="white")
 qstnarea.place(x=50, y= 100)
-loadcard=Tk.Button(window, text= "Load Card", command=lambda:[read_question(),call_back()], height =1, width=10, state= DISABLE)
+loadcard=Tk.Button(window, text= "Load Card", command=lambda:[read_question(),rem_time()], height =1, width=10)
 loadcard.place(x=50, y= 60)
 nextqstn=Tk.Button(window, text= "Next Question",command=read_question, height =3, width =10)
 nextqstn.place(x=50, y=300)
@@ -117,8 +107,8 @@ label1.grid(column=0, row=0)
 # setting remaining time
 remTime=Tk.Label(window, text="Remaining\n Time", height =2, width = 10)
 remTime.place(x=350, y =60)
-lab1 = Tk.Label(window, height=1, width = 10,bg="white")
-lab1.place(x=350, y= 100)
+timeshow = Tk.Label(window, height=1, width = 10,bg="white")
+timeshow.place(x=350, y= 100)
 
 #corrcet
 correct=Tk.Label(window, text="correct\n Guess", height =2, width = 10) #bg="red"
