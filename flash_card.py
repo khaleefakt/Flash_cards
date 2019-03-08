@@ -11,8 +11,7 @@ wrong_counter =0
 cards =[]
 remaining =60
 
-global f
-f= open("capitals.txt")
+
 #functions load_card,next_card,Score
 def remTime():
     global remainig
@@ -34,6 +33,12 @@ def myOpen():
 def close_window ():
     window.destroy()
 
+
+    
+global f
+f = open("capitals.txt")
+def call_back():
+    loadcard.config(state = DISABLED)
 def read_question():
     cards=[]
     i = f.readline()
@@ -57,6 +62,7 @@ def wrong_guess():
     global wrong_counter
     wrong_counter += 1
     lab3.config(text= wrong_counter)
+
 
 #new window
 def about():
@@ -86,16 +92,26 @@ window.title("Flash_card game")
 windowFrame = Frame(window)
 windowFrame.grid(row=5, column=4)
 
+
+chk = Tk.Checkbutton(window, text="pic")
+
 #question area
-qstnarea =Tk.Label(window,text="",height=8,width =30, bg="white")
+qstnarea =Tk.Label(window,text=
+"""Press Load Card button for
+ Load the cards, for next question
+ press Next Question button and
+ Answer for see the answer""",
+                   height=8,width =30, bg="white")
 qstnarea.place(x=50, y= 100)
+loadcard=Tk.Button(window, text= "Load Card", command=lambda:[read_question(),call_back()], height =1, width=10, state= DISABLE)
+loadcard.place(x=50, y= 60)
 nextqstn=Tk.Button(window, text= "Next Question",command=read_question, height =3, width =10)
 nextqstn.place(x=50, y=300)
 seeanswr=Tk.Button(window, text= "See Answer",command=read_answer, height =3, width =10)
 seeanswr.place(x=190, y=300)
 
 
-label1=Tk.Label(window, text=" welcome to FlashCards", font =("Ariel" ,30))
+label1=Tk.Label(window, text=" Welcome to FlashCards", font =("Ariel" ,30))
 label1.grid(column=0, row=0)
 
 # setting remaining time
@@ -139,6 +155,7 @@ filemenu1 =Tk.Menu(menubar, tearoff=0)
 filemenu.add_command(label="Level", command=myOpen)
 menubar.add_cascade(label="File",menu=filemenu)
 filemenu1.add_command(label="About Game", command =about)
+filemenu.add_command(label="Quit", command =close_window)
 menubar.add_cascade(label="About",menu=filemenu1)
 
 #add menubar to the window
