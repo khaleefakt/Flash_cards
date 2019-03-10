@@ -20,10 +20,8 @@ class MyApp(object):
     
         self.R1 = Tk.Radiobutton(self.frame, text="Capitals", value=1, command=self.level1)
         self.R2 = Tk.Radiobutton(self.frame, text="Maths",  value=2, command=self.level2)
-        self.R3 = Tk.Radiobutton(self.frame, text="GK", value=3, command=self.level2)
         self.R1.grid(column=0, row=4)
         self.R2.grid(column=0, row=5)
-        self.R3.grid(column=0, row=6)
         btnquit = Tk.Button(self.frame, text="Quit", command=self.quit)
         btnquit.grid(column=0, row=13)
     #----------------------------------------------------------------------
@@ -33,44 +31,31 @@ class MyApp(object):
     def level2(self):
         global f
         f= open("math.txt")
-    def level3(self):
-        global f
-        f = open("GK.txt")
     def hide(self):
         self.root.withdraw()
     def quit(self):
         self.root.destroy()
-
     #----------------------------------------------------------------------
-        
-
-
-    def levels(self):
+    def welcomePage(self):
         self.hide()
         levels = Tk.Tk()
         levels.geometry("500x400")
         levels.title("Levels")
         btn = Tk.Button(levels, text="Play Game", command=self.openFrame)
         btn.grid(column=0, row=3)
-      
     #----------------------------------------------------------------------
-
     def openFrame(self):
         self.hide()
         #variables
         correct_counter = 0
         wrong_counter = 0
         remaining = 60
-
-        #functions load_card,next_card,Score
-        
+    #----------------------------------------------------------------------
         def myOpen():
             myOpen = filedialog.askopenfile("/Cards")
             mlabel4 = Tk.Label(myApp, text=myOpen).pack()
         def close_window():
             window.destroy()
-    
-        
         def read_question():
             cards = []
             i = f.readline()
@@ -92,7 +77,7 @@ class MyApp(object):
         def rem_time():
             for i in range(60, 0, -1):
                 timeshow.config(text=i)
-
+    #---------------------------------------------------------------------
         #new window
         def about():
             window2 = Tk.Tk()
@@ -114,19 +99,21 @@ class MyApp(object):
         window = Tk.Tk()
         window.geometry("500x400")
         window.title("Flash_card game")
-
-                
-
+    #-------------------------------------------------------------------------
         #question area
         qstnarea = Tk.Label(window, text=
         """Press Load Card button for
          Load the cards, for next question
          press Next Question button and
          Answer for see the answer""",
-        height=8, width=30, bg="white")
+                            height=8, width=30, bg="white")
         qstnarea.place(x=50, y=100)
         loadcard = Tk.Button(window, text="Load Card", command=lambda:[read_question(), rem_time()], height=1, width=10)
         loadcard.place(x=50, y=60)
+
+        # loadcard = Tk.Button(window, text="Back", command=read_question, height=1, width=10)
+        # loadcard.place(x=5, y=5)
+        
         nextqstn = Tk.Button(window, text="Next Question", command=read_question, height=3, width=10)
         nextqstn.place(x=50, y=300)
         seeanswr = Tk.Button(window, text= "See Answer", command=read_answer, height=3, width=10)
@@ -166,15 +153,15 @@ class MyApp(object):
         menubar.add_cascade(label="About", menu=filemenu1)
         #add menubar to the window
         window.config(menu=menubar)
-
+    #-------------------------------------------------------------------------
         window.mainloop()                    
 
-        
- 
-     #----------------------------------------------------------------------
+    #----------------------------------------------------------------------
 
 if __name__ == "__main__":
     root = Tk.Tk()
     root.geometry("500x400")
     app = MyApp(root)
     root.mainloop()
+    
+    #------------------------------------------------------------------------
