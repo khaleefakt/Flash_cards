@@ -9,18 +9,42 @@ class MyApp(object):
         self.root.title("Main frame")
         self.frame = Tk.Frame(parent)
         self.frame.pack()
-        label1 = Tk.Label(self.frame, text="Welcome to FlashCards", font=("Ariel" ,30))
+    #----------------------------------------------------------------------
+        label1 = Tk.Label(self.frame, text="FlashCards", font=("Ariel" ,30))
         label1.grid(column=0, row=0)
         btnply = Tk.Button(self.frame, text="Play Game", command=self.openFrame)
-        btnply.grid(column=0, row=2)
-        btnqt = Tk.Button(self.frame, text="Quit", command=self.quit)
-        btnqt.grid(column=0, row=4)
+        btnply.grid(column=0, row=8)
+        levelInfo = Tk.Label(self.frame, text = "First You Shoul Select a Level", height=2, width=30)
+        levelInfo.grid(column=0, row=2)
+    #------------------------------------------------------------------------
+    
+        self.R1 = Tk.Radiobutton(self.frame, text="Capitals", value=1, command=self.level1)
+        self.R2 = Tk.Radiobutton(self.frame, text="Maths",  value=2, command=self.level2)
+        self.R3 = Tk.Radiobutton(self.frame, text="GK", value=3, command=self.level2)
+        self.R1.grid(column=0, row=4)
+        self.R2.grid(column=0, row=5)
+        self.R3.grid(column=0, row=6)
+        btnquit = Tk.Button(self.frame, text="Quit", command=self.quit)
+        btnquit.grid(column=0, row=13)
     #----------------------------------------------------------------------
+    def level1(self):
+        global f
+        f = open("capitals.txt")
+    def level2(self):
+        global f
+        f= open("math.txt")
+    def level3(self):
+        global f
+        f = open("GK.txt")
     def hide(self):
         self.root.withdraw()
     def quit(self):
         self.root.destroy()
+
     #----------------------------------------------------------------------
+        
+
+
     def levels(self):
         self.hide()
         levels = Tk.Tk()
@@ -28,9 +52,9 @@ class MyApp(object):
         levels.title("Levels")
         btn = Tk.Button(levels, text="Play Game", command=self.openFrame)
         btn.grid(column=0, row=3)
-
       
     #----------------------------------------------------------------------
+
     def openFrame(self):
         self.hide()
         #variables
@@ -39,14 +63,14 @@ class MyApp(object):
         remaining = 60
 
         #functions load_card,next_card,Score
-
+        
         def myOpen():
             myOpen = filedialog.askopenfile("/Cards")
             mlabel4 = Tk.Label(myApp, text=myOpen).pack()
         def close_window():
             window.destroy()
-        global f
-        f = open("capitals.txt")
+    
+        
         def read_question():
             cards = []
             i = f.readline()
@@ -68,6 +92,7 @@ class MyApp(object):
         def rem_time():
             for i in range(60, 0, -1):
                 timeshow.config(text=i)
+
         #new window
         def about():
             window2 = Tk.Tk()
@@ -89,6 +114,9 @@ class MyApp(object):
         window = Tk.Tk()
         window.geometry("500x400")
         window.title("Flash_card game")
+
+                
+
         #question area
         qstnarea = Tk.Label(window, text=
         """Press Load Card button for
