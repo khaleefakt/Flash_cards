@@ -1,5 +1,5 @@
 import tkinter as Tk
-from tkinter import filedialog
+
 
 class MyApp(object):
     #----------------------------------------------------------------------
@@ -16,8 +16,7 @@ class MyApp(object):
         btnply.grid(column=0, row=8)
         levelInfo = Tk.Label(self.frame, text = "First You Shoul Select a Level", height=2, width=30)
         levelInfo.grid(column=0, row=2)
-    #------------------------------------------------------------------------
-    
+    #------------------------------------------------------------------------    
         self.R1 = Tk.Radiobutton(self.frame, text="Capitals", value=1, command=self.level1)
         self.R2 = Tk.Radiobutton(self.frame, text="Maths",  value=2, command=self.level2)
         self.R1.grid(column=0, row=4)
@@ -51,11 +50,9 @@ class MyApp(object):
         wrong_counter = 0
         remaining = 60
     #----------------------------------------------------------------------
-        def myOpen():
-            myOpen = filedialog.askopenfile("/Cards")
-            mlabel4 = Tk.Label(myApp, text=myOpen).pack()
         def close_window():
             window.destroy()
+            self.root.destroy()
         def read_question():
             cards = []
             i = f.readline()
@@ -78,24 +75,6 @@ class MyApp(object):
             for i in range(60, 0, -1):
                 timeshow.config(text=i)
     #---------------------------------------------------------------------
-        #new window
-        def about():
-            window2 = Tk.Tk()
-            window2.geometry("500x400")
-            window2.title("About Game")
-            label4 = Tk.Label(window2, text ="""
-        A flashcard or flash card is a card bearing information, 
-        as words or numbers, on either or both sides, used in
-         classroom drills or in private study. One writes a question
-         on a side and an answer overleaf. Flashcards can bear vocabulary,
-         historical dates, formulae or any subject matter that can be
-         learned via a question-and-answer format. Flashcards are widely
-         used as a learning drill to aid memorization. They are often
-         associated with spaced repetition, i.e. reviewed at expanding
-         time intervals. """)
-            label4.place(x=20, y=20)
-            window2.mainloop()
-
         window = Tk.Tk()
         window.geometry("500x400")
         window.title("Flash_card game")
@@ -110,10 +89,7 @@ class MyApp(object):
         qstnarea.place(x=50, y=100)
         loadcard = Tk.Button(window, text="Load Card", command=lambda:[read_question(), rem_time()], height=1, width=10)
         loadcard.place(x=50, y=60)
-
-        # loadcard = Tk.Button(window, text="Back", command=read_question, height=1, width=10)
-        # loadcard.place(x=5, y=5)
-        
+ 
         nextqstn = Tk.Button(window, text="Next Question", command=read_question, height=3, width=10)
         nextqstn.place(x=50, y=300)
         seeanswr = Tk.Button(window, text= "See Answer", command=read_answer, height=3, width=10)
@@ -140,19 +116,6 @@ class MyApp(object):
         #exit Button
         btn3 = Tk.Button(window, text="Quit", command=close_window, height=3, width=10)
         btn3.place(x=350, y=300)
-        #create the menubar
-        menubar = Tk.Menu(window)
-        #create the file component of that menubar
-        filemenu = Tk.Menu(menubar, tearoff=0)
-        filemenu1 =Tk.Menu(menubar, tearoff=0)
-        #Add the sub headings to the file menu
-        filemenu.add_command(label="Level", command=myOpen)
-        menubar.add_cascade(label="File", menu=filemenu)
-        filemenu1.add_command(label="About Game", command=about)
-        filemenu.add_command(label="Quit", command=close_window)
-        menubar.add_cascade(label="About", menu=filemenu1)
-        #add menubar to the window
-        window.config(menu=menubar)
     #-------------------------------------------------------------------------
         window.mainloop()                    
 
