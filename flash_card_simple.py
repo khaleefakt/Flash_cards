@@ -7,7 +7,7 @@ f = open("capitals.txt")
 correct_counter = 0
 wrong_counter = 0
 remaining = 60
-
+#-------------------------------------------------------------------------
 def MainFrame():
     def close_window():
         window.destroy()
@@ -47,7 +47,7 @@ def MainFrame():
     def restart():
         MainFrame()
         window.destroy()
-
+ #----------------------------------------------------------------------------------------------
     window = Tk.Tk()
     window.geometry("500x400")
     window.title("Flash_card game")
@@ -84,18 +84,17 @@ def MainFrame():
     wrong.place(x=350, y=170)
     lab3 = Tk.Label(window, height=1, width=10, bg="white")
     lab3.place(x=350, y=210)
-    
     #exit Button
     btn3 = Tk.Button(window, text="Quit", command=close_window, height=3, width=10)
     btn3.place(x=350, y=300)
     btnclr = Tk.Button(window, text="Restart", command=restart, height=1, width=10)
     btnclr.place(x=350, y=5)
     return window
-
+#----------------------------------------------------------------------------------------------
 def main():
     window = MainFrame()
     window.mainloop()
-
+#------------------------------------------------------------------
 if __name__ == "__main__":
     main()
 #----------------------------------------------------------------------
