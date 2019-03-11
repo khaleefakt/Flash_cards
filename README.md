@@ -5,6 +5,8 @@ First you should install requirements.txt file using
     pip install -r requirements.txt
 
 and clone the files in to your system
-then run
+then run for simple GUI
 
-     flash_card.py file
+     python flash_card.py
+
+
