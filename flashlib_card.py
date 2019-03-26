@@ -22,10 +22,15 @@ def get_answer(cards, qn,qstnarea):
     ans = list(cards.values())
     qstnarea.config(text=ans[0])
 def ans_frame(window,cards,qn,qstnarea):
-    seeanswr= Tk.Button(window, name="show_answer", text ="Show Answer", command=get_answer(cards,qn,qstnarea), height = 2, width = 30)
+    seeanswr= Tk.Button(window, name="show_answer", text ="Show Answer",
+                        command=lambda:[get_answer(cards,qn,qstnarea),scoring(window)], height = 2, width = 30)
     seeanswr.place(x=20,y=250)
 
-
+def scoring(window):
+    right = Tk.Button(window, text ="I was Right",width = 14, height =2)
+    right.place(x=20, y=250)
+    right = Tk.Button(window, text ="I was wrong",width = 14, height =2)
+    right.place(x=150, y=250)
     
 def get_next_card(cards):
     return random.choice(list(cards))
@@ -48,8 +53,14 @@ def main():
                                           destroy_button(buttonload),
                                           ans_frame(window,cards,qn,qstnarea)])
     buttonload.place(x=20,y=20)
-
-  
+    scoreright= Tk.Label(window, text = "Right Guess")
+    scoreright.place(x=20, y=350)
+    rightscore=Tk.Label(window, text= "0")
+    rightscore.place(x=110, y=350)
+    scorewrong= Tk.Label(window, text = "Wrong Guess")
+    scorewrong.place(x=150, y=350)
+    wrongscore=Tk.Label(window, text= "0")
+    wrongscore.place(x=260, y=350)
     window.mainloop()
 
     
