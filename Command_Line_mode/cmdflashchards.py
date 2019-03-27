@@ -8,7 +8,7 @@ def main():
         card = get_next_card(cards)
         print (card)
         input("Show answer")
-2        print  ("Answer is {}".format(get_answer_for_qn(cards,  card)))
+        print  ("Answer is {}".format(get_answer_for_qn(cards,  card)))
         rw = input("r or w?")
         if rw == 'r':
             process_right_answer(state)
