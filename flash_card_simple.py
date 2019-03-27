@@ -7,6 +7,7 @@ f = open("capitals.txt")
 correct_counter = 0
 wrong_counter = 0
 remaining = 60
+
 #-------------------------------------------------------------------------
 def MainFrame():
     def close_window():
