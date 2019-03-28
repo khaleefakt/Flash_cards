@@ -30,6 +30,11 @@ def MainFrame():
         #current_line = current_line + 1
     def read_answer():
         qstnarea.config(text=a)
+    def answer_button():
+        #nextqstn.destroy()
+        seeanswr = Tk.Button(window, name="see_answr", text= "See Answer",
+                             command=lambda:[read_answer(),score(next_qstn_btn,seeanswr)], height=3, width=10)
+        seeanswr.place(x=190, y=300)
     def correct_guess():
         global correct_counter
         correct_counter += 1
@@ -38,13 +43,22 @@ def MainFrame():
         global wrong_counter
         wrong_counter += 1
         lab3.config(text=wrong_counter)
-    def score():
+    def next_qstn_btn(seeanswr,btn1,btn2):
+        seeanswr.destroy()
+        btn1.destroy()
+        btn2.destroy()
+        nextqstn = Tk.Button(window, name="next_qstn", text="Next Question",
+                             command=lambda:[read_question(),answer_button()], height=3, width=10)
+        nextqstn.place(x=50, y=300)
+    def score(next_qstn_btn,seeanswr):
         btn1 = Tk.Button(window, name="correct_guess", text="I Was Right",
-                         command=correct_guess, width=10)
+                         command=lambda:[correct_guess(),next_qstn_btn(seeanswr,btn1,btn2)], width=10)
         btn1.place(x=50, y=250)
-        #wrong
-        btn2 = Tk.Button(window, name="wrong_guess", text="I Was Wrong", command=wrong_guess, width=10)
+        btn2 = Tk.Button(window, name="wrong_guess", text="I Was Wrong",
+                         command=lambda:[wrong_guess(),next_qstn_btn(seeanswr,btn1,btn2)], width=10)
         btn2.place(x=190, y=250)
+    def disable():
+        loadcard.destroy()
     def restart():
         MainFrame()
         window.destroy()
@@ -60,22 +74,11 @@ def MainFrame():
     Answer for see the answer""",
                         height=8, width=30, bg="white")
     qstnarea.place(x=50, y=100)
-    def disable():
-        loadcard.config(state="disabled")
+ 
     loadcard = Tk.Button(window, name="load_card", text="Load Card",
-                         command=lambda:[read_question(),score(),disable()], height=1, width=10)
+                         command=lambda:[read_question(),answer_button(),disable()], height=1, width=10)
     loadcard.place(x=50, y=60)
-    nextqstn = Tk.Button(window, name="next_qstn", text="Next Question",
-                         command=lambda:[read_question()], height=3, width=10)
-    nextqstn.place(x=50, y=300)
-    seeanswr = Tk.Button(window, name="see_answr", text= "See Answer",
-                         command=read_answer, height=3, width=10)
-    seeanswr.place(x=190, y=300)
-    # setting remaining time
-    # remTime = Tk.Label(window, text="Remaining\n Time", height=2, width=10)
-    # remTime.place(x=350, y=60)
-    # timeshow = Tk.Label(window, height=1, width=10, bg="white")
-    # timeshow.place(x=350, y=100) 
+ 
     #corrcet
     correct = Tk.Label(window, text="correct\n Guess", height=2, width=10) #bg="red"
     correct.place(x=350, y =100)
