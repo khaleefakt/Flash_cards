@@ -33,8 +33,8 @@ def MainFrame():
     def answer_button():
         #nextqstn.destroy()
         seeanswr = Tk.Button(window, name="see_answr", text= "See Answer",
-                             command=lambda:[read_answer(),score(next_qstn_btn,seeanswr)], height=3, width=10)
-        seeanswr.place(x=190, y=300)
+                             command=lambda:[read_answer(),score(next_qstn_btn,seeanswr)], height=3, width=30)
+        seeanswr.place(x=40, y=250)
     def correct_guess():
         global correct_counter
         correct_counter += 1
@@ -48,15 +48,16 @@ def MainFrame():
         btn1.destroy()
         btn2.destroy()
         nextqstn = Tk.Button(window, name="next_qstn", text="Next Question",
-                             command=lambda:[read_question(),answer_button()], height=3, width=10)
-        nextqstn.place(x=50, y=300)
+                             command=lambda:[read_question(),answer_button()], height=3, width=30)
+        nextqstn.place(x=40, y=250)
     def score(next_qstn_btn,seeanswr):
+        seeanswr.destroy()
         btn1 = Tk.Button(window, name="correct_guess", text="I Was Right",
-                         command=lambda:[correct_guess(),next_qstn_btn(seeanswr,btn1,btn2)], width=10)
-        btn1.place(x=50, y=250)
+                         command=lambda:[correct_guess(),next_qstn_btn(seeanswr,btn1,btn2)], width=14,height=3)
+        btn1.place(x=40, y=250)
         btn2 = Tk.Button(window, name="wrong_guess", text="I Was Wrong",
-                         command=lambda:[wrong_guess(),next_qstn_btn(seeanswr,btn1,btn2)], width=10)
-        btn2.place(x=190, y=250)
+                         command=lambda:[wrong_guess(),next_qstn_btn(seeanswr,btn1,btn2)], width=14,height=3)
+        btn2.place(x=170, y=250)
     def disable():
         loadcard.destroy()
     def restart():
@@ -64,7 +65,7 @@ def MainFrame():
         window.destroy()
  #----------------------------------------------------------------------------------------------
     window = Tk.Tk()
-    window.geometry("500x400")
+    window.geometry("350x500")
     window.title("Flash_card game")
     #question area
     qstnarea = Tk.Label(window, name="qstnarea", text=
@@ -73,7 +74,7 @@ def MainFrame():
     press Next Question button and
     Answer for see the answer""",
                         height=8, width=30, bg="white")
-    qstnarea.place(x=50, y=100)
+    qstnarea.place(x=40, y=100)
  
     loadcard = Tk.Button(window, name="load_card", text="Load Card",
                          command=lambda:[read_question(),answer_button(),disable()], height=1, width=10)
@@ -81,13 +82,13 @@ def MainFrame():
  
     #corrcet
     correct = Tk.Label(window, text="correct\n Guess", height=2, width=10) #bg="red"
-    correct.place(x=350, y =100)
-    lab2 = Tk.Label(window, height=1, width=10,bg="white")
-    lab2.place(x=350, y=140)
+    correct.place(x=20, y =330)
+    lab2 = Tk.Label(window,text='0', height=2, width=5,bg="white")
+    lab2.place(x=100, y=330)
     wrong = Tk.Label(window, text="wrong\n Guess", height=2, width=10 )
-    wrong.place(x=350, y=170)
-    lab3 = Tk.Label(window, height=1, width=10, bg="white")
-    lab3.place(x=350, y=210)
+    wrong.place(x=150, y=330)
+    lab3 = Tk.Label(window,text='0', height=2, width=5, bg="white")
+    lab3.place(x=230, y=330)
     #exit Button
     btn3 = Tk.Button(window, text="Quit", command=close_window, height=3, width=10)
     btn3.place(x=350, y=300)
