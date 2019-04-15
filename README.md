@@ -7,6 +7,13 @@ First you should install requirements.txt file using
 and clone the files in to your system
 then run for simple GUI
 
-     python flash_card.py
+     python flash_card_simple.py
+
+you can also play this game in commandline mode. just open `Command_Line_mode` and run `cmdflashcards.py` like:
+
+    python cmdflashcards.py
+
+
+
 
 
